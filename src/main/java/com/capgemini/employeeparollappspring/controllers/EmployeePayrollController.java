@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.employeeparollappspring.dto.EmployeePayrollDTO;
 import com.capgemini.employeeparollappspring.dto.ResponseDTO;
+import com.capgemini.employeeparollappspring.exception.InputException;
 import com.capgemini.employeeparollappspring.model.EmployeePayrollData;
 import com.capgemini.employeeparollappspring.services.EmployeePayrollService;
 import com.capgemini.employeeparollappspring.services.IEmployeePayrollService;
+import com.capgemini.employeeparollappspring.validations.Validation;
 
 @RestController
 @RequestMapping("/employeepayrollservice")
@@ -28,11 +30,10 @@ public class EmployeePayrollController {
 	private IEmployeePayrollService employeepayrollService;
 	
 	@RequestMapping(value = {"", "/", "/get"})
-	public ResponseEntity<ResponseDTO> getEmployeePayrollData() {
+	public List<EmployeePayrollData> getEmployeePayrollData() {
 		List<EmployeePayrollData> empDataList = null;
 		empDataList = employeepayrollService.getEmployeePayrollData();
-		ResponseDTO responseDTO = new ResponseDTO("GET Call Successfull", empDataList);
-		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+		return empDataList;
 	}
 	
 	@GetMapping("/get/{employeeId}")
@@ -44,17 +45,19 @@ public class EmployeePayrollController {
 	}
 	
 	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> addEmployeePayrollData(@RequestBody EmployeePayrollDTO employeePayrollDTO) {
+	public ResponseEntity<ResponseDTO> addEmployeePayrollData(@RequestBody EmployeePayrollDTO employeePayrollDTO) throws InputException{
+		Validation validation = new Validation(employeePayrollDTO);
 		EmployeePayrollData employeePayrollData = null;
 		employeePayrollData = employeepayrollService.createEmployeePayrollData(employeePayrollDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Created Employee Payroll Data Successfull", employeePayrollData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 	
-	@PutMapping("/update")
-	public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@RequestBody EmployeePayrollDTO employeePayrollDTO) {
+	@PutMapping("/update/{employeeId}")
+	public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("employeeId") int employeeId, @RequestBody EmployeePayrollDTO employeePayrollDTO) throws InputException {
+		Validation validation = new Validation(employeePayrollDTO);
 		EmployeePayrollData employeePayrollData = null;
-		employeePayrollData = employeepayrollService.updateEmployeePayrollData(employeePayrollDTO);
+		employeePayrollData = employeepayrollService.updateEmployeePayrollData(employeeId, employeePayrollDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Updated Employee Payroll Data Successfull", employeePayrollData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
