@@ -39,17 +39,17 @@ public class EmployeePayrollData {
 	
 	public EmployeePayrollData(EmployeePayrollDTO employeePayrollDTO) {
 		super();
-		this.setName(employeePayrollDTO.name);
-		this.setProfilePic(employeePayrollDTO.profilePic);
-		this.setGender(employeePayrollDTO.gender);
-		this.setSalary(employeePayrollDTO.salary);
+		this.setName(employeePayrollDTO.getName());
+		this.setProfilePic(employeePayrollDTO.getProfilePic());
+		this.setGender(employeePayrollDTO.getGender());
+		this.setSalary(employeePayrollDTO.getSalary());
 		List<Department> departments = new ArrayList<Department>();
-		for(String department : employeePayrollDTO.departments) {
+		for(String department : employeePayrollDTO.getDepartments()) {
 			departments.add(new Department(department));
 		}
 		this.departments = departments;
-		this.setNotes(employeePayrollDTO.notes);
-		this.setStartDate(employeePayrollDTO.startDate);
+		this.setNotes(employeePayrollDTO.getNotes());
+		this.setStartDate(employeePayrollDTO.getStartDate());
 	}
 
 	public String getName() {
@@ -92,7 +92,7 @@ public class EmployeePayrollData {
 		return array;
 	}
 
-	public void setDepartments(String[] departments) {
+	public void setDepartments(List<String> departments) {
 		List<Department> departmentList = new ArrayList<Department>();
 		for(String department : departments) {
 			departmentList.add(new Department(department));

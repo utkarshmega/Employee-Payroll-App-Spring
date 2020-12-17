@@ -37,13 +37,13 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 	@Override
 	public EmployeePayrollData updateEmployeePayrollData(int employeeId, EmployeePayrollDTO employeePayrollDTO) {
 		EmployeePayrollData employeePayrollData = this.getEmployeePayrollDataById(employeeId);
-		employeePayrollData.setName(employeePayrollDTO.name);
-		employeePayrollData.setGender(employeePayrollDTO.gender);
-		employeePayrollData.setProfilePic(employeePayrollDTO.profilePic);
-		employeePayrollData.setSalary(employeePayrollDTO.salary);
-		employeePayrollData.setNotes(employeePayrollDTO.notes);
-		employeePayrollData.setDepartments(employeePayrollDTO.departments);
-		employeePayrollData.setStartDate(employeePayrollDTO.startDate);
+		employeePayrollData.setName(employeePayrollDTO.getName());
+		employeePayrollData.setGender(employeePayrollDTO.getGender());
+		employeePayrollData.setProfilePic(employeePayrollDTO.getProfilePic());
+		employeePayrollData.setSalary(employeePayrollDTO.getSalary());
+		employeePayrollData.setNotes(employeePayrollDTO.getNotes());
+		employeePayrollData.setDepartments(employeePayrollDTO.getDepartments());
+		employeePayrollData.setStartDate(employeePayrollDTO.getStartDate());
 		employeePayrollRepository.save(employeePayrollData);
 		
 		return employeePayrollData;
