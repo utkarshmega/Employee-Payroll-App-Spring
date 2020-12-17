@@ -46,7 +46,7 @@ public class EmployeePayrollController {
 	
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> addEmployeePayrollData(@RequestBody EmployeePayrollDTO employeePayrollDTO) throws InputException{
-		Validation validation = new Validation(employeePayrollDTO);
+		//Validation validation = new Validation(employeePayrollDTO);
 		EmployeePayrollData employeePayrollData = null;
 		employeePayrollData = employeepayrollService.createEmployeePayrollData(employeePayrollDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Created Employee Payroll Data Successfull", employeePayrollData);
@@ -55,7 +55,7 @@ public class EmployeePayrollController {
 	
 	@PutMapping("/update/{employeeId}")
 	public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("employeeId") int employeeId, @RequestBody EmployeePayrollDTO employeePayrollDTO) throws InputException {
-		Validation validation = new Validation(employeePayrollDTO);
+		//Validation validation = new Validation(employeePayrollDTO);
 		EmployeePayrollData employeePayrollData = null;
 		employeePayrollData = employeepayrollService.updateEmployeePayrollData(employeeId, employeePayrollDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Updated Employee Payroll Data Successfull", employeePayrollData);

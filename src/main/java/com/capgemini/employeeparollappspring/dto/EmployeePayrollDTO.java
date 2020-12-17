@@ -1,18 +1,27 @@
 package com.capgemini.employeeparollappspring.dto;
 
 import java.sql.Date;
+import java.util.List;
+import lombok.Data;
 
-public class EmployeePayrollDTO {
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public @Data class EmployeePayrollDTO {
 	
-	public String name;
-	public long salary;
-	public String profilePic;
-	public String gender;
-	public String notes;
-	public String[] departments;
-	public Date startDate;
+	private String name;
+	private long salary;
+	private String profilePic;
+	private String gender;
+	private String notes;
+	private List<String> departments;
+	@JsonFormat(pattern = "yyyy-mm-dd")
+	private Date startDate;
 	
-	public EmployeePayrollDTO(String name, String profilePic, String gender, long salary, String[] departments, 
+	public EmployeePayrollDTO() {
+
+	}
+
+	public EmployeePayrollDTO(String name, String profilePic, String gender, long salary, List<String> departments, 
 			Date startDate, String notes) {
 		super();
 		this.name = name;
