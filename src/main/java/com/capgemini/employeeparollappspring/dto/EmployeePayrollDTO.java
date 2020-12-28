@@ -14,7 +14,7 @@ public @Data class EmployeePayrollDTO {
 	private String gender;
 	private String notes;
 	private List<String> departments;
-	@JsonFormat(pattern = "yyyy-mm-dd")
+	@JsonFormat(pattern = "dd MMM yyyy")
 	private Date startDate;
 	
 	public EmployeePayrollDTO() {
