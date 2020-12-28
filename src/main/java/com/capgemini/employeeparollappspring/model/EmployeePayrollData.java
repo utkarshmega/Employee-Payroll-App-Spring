@@ -16,9 +16,11 @@ import javax.persistence.Table;
 
 import com.capgemini.employeeparollappspring.dto.EmployeePayrollDTO;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "employees")
-public class EmployeePayrollData {
+public @Data class EmployeePayrollData {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,12 +86,12 @@ public class EmployeePayrollData {
 		this.gender = gender;
 	}
 	
-	public String[] getDepartments() {
-		String array[] = new String[departments.size()];              
-		for(int j =0;j<departments.size();j++){
-		  array[j] = departments.get(j).getDepartmentName();
-		}
-		return array;
+	public List<Department> getDepartments() {
+//		String array[] = new String[departments.size()];              
+//		for(int j =0;j<departments.size();j++){
+//		  array[j] = departments.get(j).getDepartmentName();
+//		}
+		return departments;
 	}
 
 	public void setDepartments(List<String> departments) {
